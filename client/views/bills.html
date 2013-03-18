@@ -1,0 +1,10 @@
+<ul class='nostyle' ng-repeat="bill in bills">
+    <li>{{bill.customer}}</li>
+    <li>
+        <form ng-submit="addBill(bill)">
+            <input type="text" ng-model="newBill"  size="30"
+            placeholder="add new todo here">
+            <input class="btn-primary" type="submit" value="add">
+        </form>
+    </li>
+</ul>

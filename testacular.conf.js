@@ -5,14 +5,16 @@ basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'app/components/angular/angular.js',
-  'app/components/angular-mocks/angular-mocks.js',
-  'app/scripts/*.js',
-  'app/scripts/**/*.js',
-  'test/mock/**/*.js',
-  'test/spec/**/*.js'
+      JASMINE,
+      JASMINE_ADAPTER,
+      'client/components/angular/angular.js',
+      'client/components/angular-resource/angular-resource.js',
+      'client/components/angular-mocks/angular-mocks.js',
+      'client/scripts/*.js',
+      'client/scripts/**/*.js',
+      'test/mock/**/*.js',
+      'test/spec/customMatchers.js',
+      'test/spec/**/*.js'
 ];
 
 // list of files to exclude
@@ -20,7 +22,7 @@ exclude = [];
 
 // test results reporter to use
 // possible values: dots || progress
-reporters = ['progress','growl'];
+reporters = ['progress', 'growl'];
 
 // web server port
 port = 8080;
@@ -36,7 +38,7 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = false;
+autoWatch = true;
 
 // Start these browsers, currently available:
 // - Chrome

@@ -1,0 +1,24 @@
+<ul class="unstyled" ng-repeat="customer in customers">
+    <li>
+        {{customer.name}}
+        <ul ng-repeat="bill in customer.bills">
+            <li>{{bill.amount | currency:'€'}} <span>{{bill.due | date}}</span></li>
+        </ul>
+    </li>
+
+    <li>
+        <form ng-submit="addBill(customer,newBill)">
+            <input type="number" ng-model="newBill.amount"  size="30"
+            placeholder="Valore" required>
+            <input type="date" ng-model="newBill.due"  size="30"
+            placeholder="Scadenza" required>
+            <input class="btn btn-primary" type="submit" value="+">
+        </form>
+    </li>
+</ul>
+<span>Aggiungi Cliente</span>
+<form ng-submit="addCustomer(newCustomer)">
+    <input type="text" ng-model="newcCustomer.name"  size="30"
+    placeholder="Valore" required>
+    <input class="btn btn-primary" type="submit" value="Aggiungi">
+</form>

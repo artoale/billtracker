@@ -1,0 +1,25 @@
+{
+  "name": "angular-l10n",
+  "version": "0.0.0",
+  "main": "./angular-l10n.js",
+  "dependencies": {},
+  "ignore": [
+    "test/",
+    "example/",
+    ".*",
+    "package.json",
+    "Gruntfile.js",
+    "**/*.md",
+    "**/*.coffee"
+  ],
+  "gitHead": "d8912afb32d1ad9a1b67abb2e5b0404de80deba1",
+  "readme": "# Angular Localization\n\nSupport l10n (localization, i.e. string translation) for angular.js modules with directive `trans`. Support multi locale\nid and plurals\n\n# Usage\n\nUpdating\n\n# TODO\n\n- Markdown lint\n- Unit test\n  - Coffee\n  - Json\n- Plural\n- Usage document\n",
+  "readmeFilename": "README.md",
+  "_id": "angular-l10n@0.0.1",
+  "description": "Support l10n (localization, i.e. string translation) for angular.js modules with directive `trans`. Support multi locale id and plurals",
+  "commit": "d8912afb32d1ad9a1b67abb2e5b0404de80deba1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/truongsinh/angular-l10n"
+  }
+}

@@ -1,0 +1,43 @@
+'use strict';
+
+angular.module('billtrackerApp')
+    .factory('customer', function ($resource) {
+    var Customer = $resource('/customers/:customerId', {
+        customerId: '@_id'
+    },{
+        update: {method:'PUT'}
+    });
+
+    Customer.prototype.addBill = function(bill){
+        this.bills.push(bill);
+        this.$update();
+    };
+    var customers = [];
+
+    function getAll() {
+        if (customers.length === 0) {
+            customers = Customer.query();
+        }
+        return customers;
+    }
+
+    function add(customer) {
+        if(typeof customer !== 'object'){
+            throw new Error('First param must be an object');
+        }
+        if (!customer.bills){
+            customer.bills = [];
+        }
+        var newCustomer = new Customer(customer);
+        customers.push(newCustomer);
+        newCustomer.$save();
+        return newCustomer;
+    }
+
+
+    return {
+        getAll: getAll,
+        add: add,
+        customers: customers
+    };
+});
