@@ -9,4 +9,3 @@ angular.module('billtrackerApp')
     ];
   });
 
-console.log('pippo');

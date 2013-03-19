@@ -4,13 +4,29 @@ angular.module('billtrackerApp')
     .factory('customer', function ($resource) {
     var Customer = $resource('/customers/:customerId', {
         customerId: '@_id'
-    },{
-        update: {method:'PUT'}
+    }, {
+        update: {
+            method: 'PUT'
+        }
     });
 
-    Customer.prototype.addBill = function(bill){
-        this.bills.push(bill);
+    Customer.prototype.addBill = function (bill) {
+        this.bills.push(angular.copy(bill));
         this.$update();
+    };
+
+    Customer.prototype.getAddress = function () {
+        if (this.street) {
+            return this.street;
+        }
+        return {
+            street: 'Via del barbero', //, 12345 - Cuneo (CN)'
+            number: '30',
+            cap: '12025',
+            comune: 'Cuneo',
+            provincia: 'CN',
+            state: 'Italia'
+        };
     };
     var customers = [];
 
@@ -21,11 +37,16 @@ angular.module('billtrackerApp')
         return customers;
     }
 
+    function getById(id) {
+        var c = Customer.get({customerId:id});
+        return c;
+    }
+
     function add(customer) {
-        if(typeof customer !== 'object'){
+        if (typeof customer !== 'object') {
             throw new Error('First param must be an object');
         }
-        if (!customer.bills){
+        if (!customer.bills) {
             customer.bills = [];
         }
         var newCustomer = new Customer(customer);
@@ -37,6 +58,7 @@ angular.module('billtrackerApp')
 
     return {
         getAll: getAll,
+        getById: getById,
         add: add,
         customers: customers
     };

@@ -36,7 +36,7 @@ describe('Service: customer', function () {
         }];
         beforeEach(inject(function (_$httpBackend_) {
             httpBackend = _$httpBackend_;
-            console.log(httpBackend);
+            //console.log(httpBackend);
             httpBackend.expectGET('/customers').respond(respondCustomers);
         }));
 
@@ -75,7 +75,7 @@ describe('Service: customer', function () {
         }];
         beforeEach(inject(function (_$httpBackend_) {
             httpBackend = _$httpBackend_;
-            console.log(httpBackend);
+            //console.log(httpBackend);
             httpBackend.expectGET('/customers').respond(respondCustomers);
         }));
 
@@ -122,12 +122,14 @@ describe('Service: customer', function () {
         };
         beforeEach(inject(function (_$httpBackend_) {
             httpBackend = _$httpBackend_;
-            console.log(httpBackend);
+            //console.log(httpBackend);
             httpBackend.expectPOST('/customers').respond(response);
         }));
 
         it('should throw if nothing passed', function () {
-            expect( function () {customer.add();} ).toThrow('First param must be an object');
+            expect(function () {
+                customer.add();
+            }).toThrow('First param must be an object');
 
         });
         it('should do a POST request', function () {
@@ -157,6 +159,21 @@ describe('Service: customer', function () {
             httpBackend.verifyNoOutstandingRequest();
         });
 
+    });
+
+    describe('getById', function () {
+        var httpBackend;
+        beforeEach(inject(function (_$httpBackend_) {
+            httpBackend = _$httpBackend_;
+            //console.log(httpBackend);
+            httpBackend.expectGET('/customers/12345').respond({});
+        }));
+        it('should make a GET request to /customer/:customerID',function () {
+            customer.getById(12345);
+            httpBackend.flush();
+            httpBackend.verifyNoOutstandingExpectation();
+            httpBackend.verifyNoOutstandingRequest();
+        });
     });
 
 });

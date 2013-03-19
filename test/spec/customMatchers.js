@@ -1,6 +1,5 @@
 'use strict';
 beforeEach(function () {
-    console.log('aggiungo robbaaaa');
     this.addMatchers({
 
         toBeSimilarTo: function (expected) {

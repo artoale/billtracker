@@ -2,6 +2,8 @@
 
 angular.module('billtrackerApp', ['ngResource'])
     .config(function ($routeProvider) {
+    // $httpProvider.responseInterceptors.push('interceptorResponse');
+
     $routeProvider.when('/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
@@ -11,9 +13,14 @@ angular.module('billtrackerApp', ['ngResource'])
         controller: 'BillsCtrl'
     })
         .when('/customers', {
-          templateUrl: 'views/customers.html',
-          controller: 'CustomersCtrl'
-        })
+        templateUrl: 'views/customers.html',
+        controller: 'CustomersCtrl'
+    })
+
+    .when('/customers/:customerId', {
+        templateUrl: 'views/customerDetails.html',
+        controller: 'CustomerDetailsCtrl'
+    })
         .otherwise({
         redirectTo: '/'
     });

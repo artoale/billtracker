@@ -1,0 +1,134 @@
+<header>
+    <h1>
+        {{customer.name}} - Dettagli Cliente
+    </h1>
+</header>
+<hr>
+<div class="row">
+    <address class="span4">
+        <h3>
+            Dati fatturazione
+        </h3>
+        <ul class="unstyled">
+            <li>
+                {{customer.getAddress().street}}, {{customer.getAddress().number}}
+            </li>
+            <li>
+                {{customer.getAddress().cap}} - {{customer.getAddress().comune}} ({{customer.getAddress().provincia}})
+            </li>
+            <li>
+                {{customer.getAddress().state}}
+            </li>
+            <li>
+                P.IVA: {{ customer.piva}}
+            </li>
+            <li>
+                C.F.: {{customer.CF}}
+            </li>
+        </ul>
+    </address>
+    <div class="span4">
+        <h3>
+            Riassunto fatture
+        </h3>
+        <ul class="unstyled">
+            <li>
+                Numero fatture emesse: 3
+            </li>
+            <li>
+                Totale fatturato: 360 €
+            </li>
+            <li>
+                Ancora da pagare:
+                <span class="warning">
+                    120 €
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="span4">
+        <h3>
+            Domini registrati
+        </h3>
+        <ul class="unstyled">
+            <li>
+                alpepito.it
+            </li>
+            <li>
+                www.porcoalongi.it
+            </li>
+            <li>
+                desderiserramenti.it
+            </li>
+        </ul>
+    </div>
+</div>
+<hr>
+<div class="row">
+    <div class="span12">
+        <h3>
+            Elenco fatture
+            <span class="btn" ng-click="toggleForm()">
+                <i class="icon-plus">
+                </i>
+            </span>
+        </h3>
+        <form class="form-inline" ng-submit="addBill(newBill)" ng-show="billFormShow">
+            <input type="text"  placeholder="Dominio" ng-model="newBill.domain">
+            <input type="number"  placeholder="Valore" ng-model="newBill.amount">
+            <input type="text"  placeholder="Scadenza" ng-model="newBill.due">
+            <button type="submit" class="btn">
+                Add
+            </button>
+        </form>
+        <table class='table table-hover'>
+            <thead>
+                <th>
+                    Dominio
+                </th>
+                <th>
+                    Valore
+                </th>
+                <th>
+                    Scadenza
+                </th>
+                <th>
+                    Pagato
+                </th>
+                <th>
+                    Azioni
+                </th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="bill in customer.bills">
+                    <td>
+                        <a href="http://{{bill.domain || 'www.example.com'}}">{{bill.domain || 'www.example.com'}}</a>
+                    </td>
+                    <td>
+                        {{bill.amount | currency:'€'}}
+                    </td>
+                    <td>
+                        {{bill.due | date:'d/M/y'}}
+                    </td>
+                    <td>
+                        {{bill.payed || No }}
+                    </td>
+                    <td>
+                        <div class="btn-group">
+                            <a class="btn" ng-class="{'btn-primary':true, 'btn-success':bill.payed}" href="" ng-click="markPayed(bill)"><i class="icon-ok icon-white"></i> Pagata</a>
+                            <a class="btn dropdown-toggle" ng-class="{'btn-primary':true, 'btn-success':bill.payed}" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href=""><i class="icon-edit"></i> Modifica fattura</a>
+                                </li>
+                                <li>
+                                    <a href="" ng-click="removeBill(bill)"><i class="icon-trash"></i> Elimina fattura</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
